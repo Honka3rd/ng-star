@@ -1,2 +1,2 @@
 <h1>Angular</h1>
-<app-star></app-star>
+<app-star [stared]='post.isFavourite' (change)='onFavouriteChanged($event)'></app-star>

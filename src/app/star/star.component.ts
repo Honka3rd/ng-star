@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-star',
@@ -7,21 +7,28 @@ import { Component } from '@angular/core';
 })
 export class StarComponent{
 
-  stared;
-  className;
+  @Input('stared') stared:boolean;
+  className:string;
+  @Output() change = new EventEmitter();
 
   constructor(){
-    this.stared = false;
-    this.className = "star outline icon";
+    if(this.stared == false)
+      this.className = "star outline icon";
+    else
+      this.className = "star icon"
   }
 
   onClick=()=>{
     this.stared = !this.stared;
+    this.change.emit({state: this.stared});
     if(this.stared === true){
       this.className = "star icon";
     }else{
       this.className = "star outline icon";
     }
   }
+}
 
+export interface starArgs{
+  state: boolean;
 }
